@@ -1,4 +1,20 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+ext{
+    //dependencies versions
+    supportLibraryVersion = '27.1.1'
+    junitVersion = '4.12'
+    runnerVersion = '1.0.1'
+    espressoVersion = '3.0.1'
+    rxAndroidVersion = '2.0.1'
+    rxJavaVersion = '2.1.9'
+    retrofitVersion = '2.4.0'
+    rxRetrofitAdapterVersion = '1.0.0'
+    okHttpVersion = '3.10.0'
+    okHttpLogginVersion = '3.4.1'
+    daggerVersion = '2.12'
+    supportConstraintLayoutVersion = '1.1.2'
+    googleMapsVersion = '15.0.1'
+}
 
 buildscript {
     
