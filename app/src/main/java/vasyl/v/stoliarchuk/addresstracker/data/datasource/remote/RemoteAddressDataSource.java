@@ -17,7 +17,7 @@ public class RemoteAddressDataSource implements AddressDataSource {
     }
 
     @Override
-    public Maybe<Place> getPlace(float lat, float lon) {
+    public Maybe<Place> getPlace(double lat, double lon) {
         return restApi.getPlace(lat, lon)
                 .map(placeFromRetrofitMapper);
     }

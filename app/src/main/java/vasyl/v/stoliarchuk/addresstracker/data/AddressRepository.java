@@ -12,7 +12,7 @@ public class AddressRepository implements AddressDataSource {
     }
 
     @Override
-    public Maybe<Place> getPlace(float lat, float lon) {
+    public Maybe<Place> getPlace(double lat, double lon) {
         return remoteAddressDataSource.getPlace(lat, lon);
     }
 }

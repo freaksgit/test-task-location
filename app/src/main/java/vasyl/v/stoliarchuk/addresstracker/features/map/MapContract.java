@@ -2,6 +2,8 @@ package vasyl.v.stoliarchuk.addresstracker.features.map;
 
 import android.location.Location;
 
+import vasyl.v.stoliarchuk.addresstracker.data.entity.Place;
+
 public interface MapContract {
     interface View{
 
@@ -16,6 +18,10 @@ public interface MapContract {
         void showPermissionDeniedFinishToast();
 
         void finish();
+
+        void hideProgress();
+
+        void setPlace(Place place);
     }
 
     interface Presenter{

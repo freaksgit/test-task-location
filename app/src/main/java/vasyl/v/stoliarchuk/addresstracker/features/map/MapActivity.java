@@ -11,6 +11,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -25,6 +28,7 @@ import javax.inject.Inject;
 
 import dagger.android.support.DaggerAppCompatActivity;
 import vasyl.v.stoliarchuk.addresstracker.R;
+import vasyl.v.stoliarchuk.addresstracker.data.entity.Place;
 
 public class MapActivity extends DaggerAppCompatActivity implements MapContract.View, OnMapReadyCallback {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
@@ -38,6 +42,9 @@ public class MapActivity extends DaggerAppCompatActivity implements MapContract.
     private AlertDialog needLocationProviderDialog;
     private AlertDialog locationPermissionRationaleDialog;
 
+    private ProgressBar progressBar;
+    private TextView addressTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +52,8 @@ public class MapActivity extends DaggerAppCompatActivity implements MapContract.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.activity_map_fragment);
         mapFragment.getMapAsync(this);
+        progressBar = findViewById(R.id.activity_map_address_progress);
+        addressTextView = findViewById(R.id.activity_map_address_text);
     }
 
     @Override
@@ -110,6 +119,18 @@ public class MapActivity extends DaggerAppCompatActivity implements MapContract.
     @Override
     public void showPermissionDeniedFinishToast() {
         Toast.makeText(this, R.string.permission_denied_finish_message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void hideProgress() {
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void setPlace(Place place) {
+        if (place != null){
+            addressTextView.setText(place.getDisplayName());
+        }
     }
 
     private void requestLocationPermission() {

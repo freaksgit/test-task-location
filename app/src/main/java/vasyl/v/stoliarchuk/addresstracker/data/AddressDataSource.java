@@ -4,5 +4,5 @@ import io.reactivex.Maybe;
 import vasyl.v.stoliarchuk.addresstracker.data.entity.Place;
 
 public interface AddressDataSource {
-    Maybe<Place> getPlace(float lat, float lon);
+    Maybe<Place> getPlace(double lat, double lon);
 }

@@ -2,8 +2,10 @@ package vasyl.v.stoliarchuk.addresstracker.features.map;
 
 import android.util.Log;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import vasyl.v.stoliarchuk.addresstracker.data.AddressDataSource;
 import vasyl.v.stoliarchuk.addresstracker.gateway.location.LocationTracker;
 
@@ -46,7 +48,17 @@ public class MapPresenter implements MapContract.Presenter {
 
     private void subscribeOnLocationUpdates() {
         Disposable disposable = locationTracker.getLastLocationFlowable()
-                .subscribe(mvpView::updateMapWithLocation);
+                .map(location -> {
+                    mvpView.updateMapWithLocation(location);
+                    return location;
+                })
+                .observeOn(Schedulers.io())
+                .flatMapMaybe(location -> addressRepository.getPlace(location.getLatitude(), location.getLongitude()))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(place -> {
+                    mvpView.hideProgress();
+                    mvpView.setPlace(place);
+                });
         disposables.add(disposable);
     }
 
