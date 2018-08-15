@@ -6,10 +6,14 @@ import android.location.LocationManager;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Named;
+
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
+import vasyl.v.stoliarchuk.addresstracker.data.AddressDataSource;
 import vasyl.v.stoliarchuk.addresstracker.di.ActivityScope;
+import vasyl.v.stoliarchuk.addresstracker.di.DiName;
 import vasyl.v.stoliarchuk.addresstracker.gateway.location.AndroidLocationTracker;
 import vasyl.v.stoliarchuk.addresstracker.gateway.location.LocationTracker;
 
@@ -21,8 +25,10 @@ public abstract class MapActivityModule {
 
     @Provides
     @ActivityScope
-    static MapContract.Presenter provideMapPresenter(MapContract.View mvpView, LocationTracker locationTracker) {
-        return new MapPresenter(mvpView, locationTracker);
+    static MapContract.Presenter provideMapPresenter(MapContract.View mvpView,
+                                                     LocationTracker locationTracker,
+                                                     @Named(DiName.REPOSITORY) AddressDataSource addressRepository) {
+        return new MapPresenter(mvpView, locationTracker, addressRepository);
     }
 
     @Provides

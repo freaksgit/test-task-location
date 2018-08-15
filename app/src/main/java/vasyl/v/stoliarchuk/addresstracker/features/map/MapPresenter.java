@@ -4,6 +4,7 @@ import android.util.Log;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import vasyl.v.stoliarchuk.addresstracker.data.AddressDataSource;
 import vasyl.v.stoliarchuk.addresstracker.gateway.location.LocationTracker;
 
 public class MapPresenter implements MapContract.Presenter {
@@ -12,10 +13,14 @@ public class MapPresenter implements MapContract.Presenter {
 
     private final MapContract.View mvpView;
     private final LocationTracker locationTracker;
+    private final AddressDataSource addressRepository;
 
-    public MapPresenter(MapContract.View mvpView, LocationTracker locationTracker) {
+    public MapPresenter(MapContract.View mvpView,
+                        LocationTracker locationTracker,
+                        AddressDataSource addressRepository) {
         this.mvpView = mvpView;
         this.locationTracker = locationTracker;
+        this.addressRepository = addressRepository;
     }
 
     @Override

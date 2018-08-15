@@ -8,11 +8,15 @@ import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 import vasyl.v.stoliarchuk.addresstracker.App;
 import vasyl.v.stoliarchuk.addresstracker.di.module.AndroidModule;
+import vasyl.v.stoliarchuk.addresstracker.di.module.DataModule;
+import vasyl.v.stoliarchuk.addresstracker.di.module.NetworkModule;
 
 @Singleton
 @Component(modules = {
         AndroidSupportInjectionModule.class,
-        AndroidModule.class})
+        AndroidModule.class,
+        DataModule.class,
+        NetworkModule.class})
 
 public interface AppComponent extends AndroidInjector<App> {
 
