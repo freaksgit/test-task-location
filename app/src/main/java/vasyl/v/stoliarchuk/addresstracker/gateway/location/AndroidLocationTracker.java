@@ -98,6 +98,11 @@ public class AndroidLocationTracker implements LocationTracker {
     }
 
     @Override
+    public boolean isAnyProviderEnabled() {
+        return isGpsEnabled() || isNetworkEnabled();
+    }
+
+    @Override
     public Flowable<LocationProviderState> listenProvidersStateUpdates() {
         return Flowable.create(new FlowableOnSubscribe<LocationProviderState>() {
 
@@ -129,7 +134,6 @@ public class AndroidLocationTracker implements LocationTracker {
                         }
                     }
                 };
-
                 locationManager.requestLocationUpdates(Long.MAX_VALUE, Float.MAX_VALUE, new Criteria(), locationListener, null);
             }
         }, BackpressureStrategy.MISSING);

@@ -27,5 +27,7 @@ public interface LocationTracker {
 
     boolean isNetworkEnabled();
 
+    boolean isAnyProviderEnabled();
+
     Flowable<LocationProviderState> listenProvidersStateUpdates();
 }

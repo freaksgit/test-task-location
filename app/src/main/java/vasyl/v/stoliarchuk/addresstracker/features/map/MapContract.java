@@ -8,16 +8,24 @@ public interface MapContract {
         void checkLocationPermission();
 
         void updateMapWithLocation(Location location);
+
+        void showNeedLocationProviderAvailabilityMessage();
+
+        void hideNeedLocationProviderAvailabilityMessage();
+
+        void showPermissionDeniedFinishToast();
+
+        void finish();
     }
 
     interface Presenter{
-
-        void onMapReady();
 
         void onLocationPermissionGranted();
 
         void onLocationPermissionDenied();
 
         void unsubscribe();
+
+        void subscribe();
     }
 }
