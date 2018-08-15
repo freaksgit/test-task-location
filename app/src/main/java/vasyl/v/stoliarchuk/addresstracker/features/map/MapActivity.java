@@ -7,10 +7,15 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 
+import javax.inject.Inject;
+
 import dagger.android.AndroidInjection;
 import vasyl.v.stoliarchuk.addresstracker.R;
 
-public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapActivity extends FragmentActivity implements MapContract.View, OnMapReadyCallback {
+
+    @Inject
+    MapContract.Presenter presenter;
 
     private GoogleMap map;
 
@@ -27,5 +32,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
+        presenter.onMapReady();
     }
 }
