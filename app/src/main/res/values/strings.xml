@@ -3,4 +3,5 @@
     <string name="permission_location_rationale_message">Application need access to location. Please grant required permission.</string>
     <string name="permission_location_rationale_positive_button">RE-TRY</string>
     <string name="permission_location_rationale_negative_button">I\'M SURE</string>
+    <string name="map_activity_marker_message">You are here</string>
 </resources>

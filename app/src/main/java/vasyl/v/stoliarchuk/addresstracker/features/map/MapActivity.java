@@ -2,26 +2,31 @@ package vasyl.v.stoliarchuk.addresstracker.features.map;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import javax.inject.Inject;
 
-import dagger.android.AndroidInjection;
 import dagger.android.support.DaggerAppCompatActivity;
 import vasyl.v.stoliarchuk.addresstracker.R;
 
 public class MapActivity extends DaggerAppCompatActivity implements MapContract.View, OnMapReadyCallback {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+
+    private Marker locationMarker;
 
     @Inject
     MapContract.Presenter presenter;
@@ -31,7 +36,6 @@ public class MapActivity extends DaggerAppCompatActivity implements MapContract.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        AndroidInjection.inject(this);
         setContentView(R.layout.activity_map);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.activity_map_fragment);
@@ -57,6 +61,17 @@ public class MapActivity extends DaggerAppCompatActivity implements MapContract.
         } else {
             presenter.onLocationPermissionGranted();
         }
+    }
+
+    @Override
+    public void updateMapWithLocation(Location location) {
+        LatLng userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+        if (locationMarker == null) {
+            locationMarker = map.addMarker(new MarkerOptions().position(userLatLng).title(getString(R.string.map_activity_marker_message)));
+        } else {
+            locationMarker.setPosition(userLatLng);
+        }
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, 15.0f));
     }
 
     private void requestLocationPermission() {
@@ -89,5 +104,11 @@ public class MapActivity extends DaggerAppCompatActivity implements MapContract.
                 break;
             }
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        presenter.unsubscribe();
     }
 }
