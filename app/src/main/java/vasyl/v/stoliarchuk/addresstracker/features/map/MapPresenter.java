@@ -8,6 +8,16 @@ public class MapPresenter implements MapContract.Presenter{
 
     @Override
     public void onMapReady() {
+        mvpView.checkLocationPermission();
+    }
+
+    @Override
+    public void onLocationPermissionGranted() {
+
+    }
+
+    @Override
+    public void onLocationPermissionDenied() {
 
     }
 }
