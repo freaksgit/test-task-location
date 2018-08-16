@@ -1,4 +1,4 @@
-package vasyl.v.stoliarchuk.addresstracker.gateway.location.location.state;
+package vasyl.v.stoliarchuk.addresstracker.gateway.location.state;
 
 public class LocationProviderState {
     private final String provider;

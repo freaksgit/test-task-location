@@ -14,8 +14,8 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import vasyl.v.stoliarchuk.addresstracker.data.AddressDataSource;
-import vasyl.v.stoliarchuk.addresstracker.gateway.location.connectivity.ConnectivityTracker;
-import vasyl.v.stoliarchuk.addresstracker.gateway.location.location.LocationTracker;
+import vasyl.v.stoliarchuk.addresstracker.gateway.connectivity.ConnectivityTracker;
+import vasyl.v.stoliarchuk.addresstracker.gateway.location.LocationTracker;
 
 public class MapPresenter implements MapContract.Presenter {
     private final CompositeDisposable disposables = new CompositeDisposable();

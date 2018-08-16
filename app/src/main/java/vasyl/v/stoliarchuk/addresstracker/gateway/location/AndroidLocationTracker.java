@@ -1,4 +1,4 @@
-package vasyl.v.stoliarchuk.addresstracker.gateway.location.location;
+package vasyl.v.stoliarchuk.addresstracker.gateway.location;
 
 import android.annotation.SuppressLint;
 import android.location.Criteria;
@@ -12,7 +12,7 @@ import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableEmitter;
 import io.reactivex.FlowableOnSubscribe;
-import vasyl.v.stoliarchuk.addresstracker.gateway.location.location.state.LocationProviderState;
+import vasyl.v.stoliarchuk.addresstracker.gateway.location.state.LocationProviderState;
 
 public class AndroidLocationTracker implements LocationTracker {
     private static final String TAG = AndroidLocationTracker.class.getSimpleName();

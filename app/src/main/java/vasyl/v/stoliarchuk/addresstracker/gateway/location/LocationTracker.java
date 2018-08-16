@@ -1,4 +1,4 @@
-package vasyl.v.stoliarchuk.addresstracker.gateway.location.location;
+package vasyl.v.stoliarchuk.addresstracker.gateway.location;
 
 import android.location.Location;
 import android.support.annotation.IntDef;
@@ -7,7 +7,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 import io.reactivex.Flowable;
-import vasyl.v.stoliarchuk.addresstracker.gateway.location.location.state.LocationProviderState;
+import vasyl.v.stoliarchuk.addresstracker.gateway.location.state.LocationProviderState;
 
 public interface LocationTracker {
 

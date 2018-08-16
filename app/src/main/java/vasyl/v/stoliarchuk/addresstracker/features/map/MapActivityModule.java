@@ -14,10 +14,10 @@ import dagger.Provides;
 import vasyl.v.stoliarchuk.addresstracker.data.AddressDataSource;
 import vasyl.v.stoliarchuk.addresstracker.di.ActivityScope;
 import vasyl.v.stoliarchuk.addresstracker.di.DiName;
-import vasyl.v.stoliarchuk.addresstracker.gateway.location.connectivity.AndroidConnectivityTracker;
-import vasyl.v.stoliarchuk.addresstracker.gateway.location.connectivity.ConnectivityTracker;
-import vasyl.v.stoliarchuk.addresstracker.gateway.location.location.AndroidLocationTracker;
-import vasyl.v.stoliarchuk.addresstracker.gateway.location.location.LocationTracker;
+import vasyl.v.stoliarchuk.addresstracker.gateway.connectivity.AndroidConnectivityTracker;
+import vasyl.v.stoliarchuk.addresstracker.gateway.connectivity.ConnectivityTracker;
+import vasyl.v.stoliarchuk.addresstracker.gateway.location.AndroidLocationTracker;
+import vasyl.v.stoliarchuk.addresstracker.gateway.location.LocationTracker;
 import vasyl.v.stoliarchuk.addresstracker.util.DeviceUtils;
 
 @Module

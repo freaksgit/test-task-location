@@ -1,4 +1,4 @@
-package vasyl.v.stoliarchuk.addresstracker.gateway.location.connectivity;
+package vasyl.v.stoliarchuk.addresstracker.gateway.connectivity;
 
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
