@@ -14,8 +14,11 @@ import dagger.Provides;
 import vasyl.v.stoliarchuk.addresstracker.data.AddressDataSource;
 import vasyl.v.stoliarchuk.addresstracker.di.ActivityScope;
 import vasyl.v.stoliarchuk.addresstracker.di.DiName;
-import vasyl.v.stoliarchuk.addresstracker.gateway.location.AndroidLocationTracker;
-import vasyl.v.stoliarchuk.addresstracker.gateway.location.LocationTracker;
+import vasyl.v.stoliarchuk.addresstracker.gateway.location.connectivity.AndroidConnectivityTracker;
+import vasyl.v.stoliarchuk.addresstracker.gateway.location.connectivity.ConnectivityTracker;
+import vasyl.v.stoliarchuk.addresstracker.gateway.location.location.AndroidLocationTracker;
+import vasyl.v.stoliarchuk.addresstracker.gateway.location.location.LocationTracker;
+import vasyl.v.stoliarchuk.addresstracker.util.DeviceUtils;
 
 @Module
 public abstract class MapActivityModule {
@@ -27,8 +30,9 @@ public abstract class MapActivityModule {
     @ActivityScope
     static MapContract.Presenter provideMapPresenter(MapContract.View mvpView,
                                                      LocationTracker locationTracker,
+                                                     ConnectivityTracker connectivityTracker,
                                                      @Named(DiName.REPOSITORY) AddressDataSource addressRepository) {
-        return new MapPresenter(mvpView, locationTracker, addressRepository);
+        return new MapPresenter(mvpView, locationTracker, connectivityTracker, addressRepository);
     }
 
     @Provides
@@ -57,5 +61,11 @@ public abstract class MapActivityModule {
         final long minTimeBetweenUpdates = TimeUnit.MINUTES.toMillis(1);
         final long minDistanceBetweenUpdates = 10; // in meters
         return new AndroidLocationTracker(locationManager, minTimeBetweenUpdates, minDistanceBetweenUpdates, criteria);
+    }
+
+    @Provides
+    @ActivityScope
+    static ConnectivityTracker provideConnectivityTracker(MapActivity mapActivity, DeviceUtils deviceUtils) {
+        return new AndroidConnectivityTracker(mapActivity, deviceUtils);
     }
 }

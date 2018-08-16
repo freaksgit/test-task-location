@@ -10,13 +10,15 @@ import vasyl.v.stoliarchuk.addresstracker.App;
 import vasyl.v.stoliarchuk.addresstracker.di.module.AndroidModule;
 import vasyl.v.stoliarchuk.addresstracker.di.module.DataModule;
 import vasyl.v.stoliarchuk.addresstracker.di.module.NetworkModule;
+import vasyl.v.stoliarchuk.addresstracker.di.module.UtilsModule;
 
 @Singleton
 @Component(modules = {
         AndroidSupportInjectionModule.class,
         AndroidModule.class,
         DataModule.class,
-        NetworkModule.class})
+        NetworkModule.class,
+        UtilsModule.class})
 
 public interface AppComponent extends AndroidInjector<App> {
 

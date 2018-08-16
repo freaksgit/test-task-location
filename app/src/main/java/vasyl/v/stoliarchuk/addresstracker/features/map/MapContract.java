@@ -22,6 +22,16 @@ public interface MapContract {
         void hideProgress();
 
         void setPlace(Place place);
+
+        void showConnectionFailedMessage();
+
+        void showBadLocationDataMessage();
+
+        void showServerErrorMessage();
+
+        void showUnknownErrorMessage();
+
+        void toggleAddressTextVisibility(boolean visible);
     }
 
     interface Presenter{

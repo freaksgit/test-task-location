@@ -7,10 +7,12 @@ import android.location.Location;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -34,6 +36,7 @@ public class MapActivity extends DaggerAppCompatActivity implements MapContract.
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
     private Marker locationMarker;
+    private Snackbar snackbar;
 
     @Inject
     MapContract.Presenter presenter;
@@ -44,6 +47,8 @@ public class MapActivity extends DaggerAppCompatActivity implements MapContract.
 
     private ProgressBar progressBar;
     private TextView addressTextView;
+    private CoordinatorLayout rootLayout;
+    private CardView addressCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +59,8 @@ public class MapActivity extends DaggerAppCompatActivity implements MapContract.
         mapFragment.getMapAsync(this);
         progressBar = findViewById(R.id.activity_map_address_progress);
         addressTextView = findViewById(R.id.activity_map_address_text);
+        rootLayout = findViewById(R.id.activity_map_root);
+        addressCard = findViewById(R.id.activity_map_card);
     }
 
     @Override
@@ -128,7 +135,7 @@ public class MapActivity extends DaggerAppCompatActivity implements MapContract.
 
     @Override
     public void setPlace(Place place) {
-        if (place != null){
+        if (place != null) {
             addressTextView.setText(place.getDisplayName());
         }
     }
@@ -151,7 +158,6 @@ public class MapActivity extends DaggerAppCompatActivity implements MapContract.
         locationPermissionRationaleDialog.show();
     }
 
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
         switch (requestCode) {
@@ -170,5 +176,38 @@ public class MapActivity extends DaggerAppCompatActivity implements MapContract.
     protected void onPause() {
         super.onPause();
         presenter.unsubscribe();
+    }
+
+    @Override
+    public void showConnectionFailedMessage() {
+        snackbar = Snackbar.make(rootLayout, "Smth going wrong. Please check you internet connection or try again later.", Snackbar.LENGTH_LONG);
+        snackbar.show();
+    }
+
+    @Override
+    public void showBadLocationDataMessage() {
+        snackbar = Snackbar.make(rootLayout, "Location data is bad.", Snackbar.LENGTH_LONG);
+        snackbar.show();
+    }
+
+    @Override
+    public void showServerErrorMessage() {
+        snackbar = Snackbar.make(rootLayout, "Smth going wrong. Try again.", Snackbar.LENGTH_LONG);
+        snackbar.show();
+    }
+
+    @Override
+    public void showUnknownErrorMessage() {
+        snackbar = Snackbar.make(rootLayout, "Smth going wrong. Please try again.", Snackbar.LENGTH_LONG);
+        snackbar.show();
+    }
+
+    @Override
+    public void toggleAddressTextVisibility(boolean visible) {
+        if (visible) {
+            addressCard.setVisibility(View.VISIBLE);
+        } else {
+            addressCard.setVisibility(View.INVISIBLE);
+        }
     }
 }

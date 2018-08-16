@@ -56,4 +56,6 @@ dependencies {
     implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$rootProject.ext.rxRetrofitAdapterVersion"
     implementation "com.squareup.okhttp3:okhttp:$rootProject.ext.okHttpVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.okHttpLogginVersion"
+
+    implementation 'com.cantrowitz:rxbroadcast:2.0.0'
 }
